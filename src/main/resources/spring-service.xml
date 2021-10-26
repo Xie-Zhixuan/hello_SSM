@@ -9,16 +9,13 @@
 
     <!--<context:component-scan base-package="com.xzx.service"/>-->
 
-    <bean id="bookService" class="com.xzx.service.BookServiceImpl">
-        <constructor-arg name="sqlSession" ref="sessionTemplate"/>
-    </bean>
-    <bean id="bookService1" class="com.xzx.service.BookServiceImpl_">
-        <property name="sqlSessionTemplate" ref="sessionTemplate"/>
-    </bean>
-    <bean id="bookServiceM" class="com.xzx.service.BookServiceImpl_mapper">
-        <constructor-arg name="bookMapper" ref="bookMapper"/>
+    <bean id="userService" class="com.xzx.service.UserServiceImpl">
+        <constructor-arg name="userMapper" ref="userDao"/>
     </bean>
 
+    <bean id="courseService" class="com.xzx.service.CourseServiceImpl">
+        <constructor-arg name="courseMapper" ref="courseDao"/>
+    </bean>
 
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

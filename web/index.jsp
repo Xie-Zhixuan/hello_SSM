@@ -8,11 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>欢迎来到牛马之家</title>
   </head>
   <body>
   <%=LocalDate.now()%>
-
-  <a href="/book/allBook">点击进入书籍页面</a>
+  <br>
+  <a href="/course/allCourse">点击进入课程表</a>
   </body>
 </html>

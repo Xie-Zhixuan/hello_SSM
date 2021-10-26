@@ -32,17 +32,10 @@
     </bean>
 
 
-
 <!--    已被后来者淘汰-->
     <bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
-
-
-<!--    <bean id="bookMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
-<!--        <property name="mapperInterface" value="com.xzx.dao.BookMapper" />-->
-<!--        <property name="sqlSessionFactory" ref="sqlSessionFactory" />-->
-<!--    </bean>-->
 
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

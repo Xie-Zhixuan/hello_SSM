@@ -10,9 +10,9 @@
 <!--    </settings>-->
 
     <typeAliases>
-        <typeAlias type="com.xzx.pojo.Book" alias="Book"/>
+        <typeAlias type="com.xzx.pojo.User" alias="User"/>
+        <typeAlias type="com.xzx.pojo.Course" alias="Course"/>
     </typeAliases>
-    
 
 
 <!--    交由Spring调配-->
