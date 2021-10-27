@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -19,69 +19,74 @@ public class CourseController {
     @Qualifier("courseService")
     CourseService courseService;
 
-    @RequestMapping("/allCourse")
-    public String showAllCourses(Model model){
-
+    @GetMapping
+    public String showAllCourses(Model model, HttpServletRequest request){
+        System.out.println(request.getMethod());
         List<Course> allCourse = courseService.findAll();
         model.addAttribute("list",allCourse);
         return "allCourse";
     }
 
 
-    @RequestMapping("/del/{ID}")
+    @DeleteMapping("/{ID}")
     public String delCourse(@PathVariable int ID){
-        System.out.println("收到对 "+ID+" 的删除请求");
+//        System.out.println("收到对 "+ID+" 的删除请求");
         boolean delete = courseService.delete(ID);
         if(delete) System.out.println("del done!");
         else System.out.println("del fault");
 
-        return "redirect:/course/allCourse";
+        return "redirect:/course";
     }
 
-    @RequestMapping("/toUpdateCourse/{ID}")
+    @PostMapping("/{ID}")
     public String toUpdateCourseJSP(@PathVariable int ID,Model model){
         Course course = courseService.findByID(ID);
         model.addAttribute("course",course);
         return "updateCourse";
     }
 
-    @RequestMapping("/updateCourse")
+    @RequestMapping("/update")
     public String updateCourse(Course course){
         System.out.println(course);
         boolean update = courseService.update(course);
         if(update) System.out.println("update done!");
         else System.out.println("update fault");
 
-        return "redirect:/course/allCourse";
+        return "redirect:/course";
     }
 
-    @RequestMapping("/toAddCourse")
+
+    @PutMapping
     public String toAddCourseJSP(){
         return "addCourse";
     }
 
-    @RequestMapping("/addCourse")
+    @RequestMapping("/add")
     public String addCourse(Course course){
         boolean insert = courseService.insert(course);
         if (insert) System.out.println("insert done!");
         else System.out.println("insert fault");
-
-        return "redirect:/course/allCourse";
+        return "redirect:/course";
     }
 
-    @RequestMapping("/search")
-    public String searchCourse_obscure(String Name,Model model){
-        System.out.println("收到关于 "+Name+" 的查询请求");
-        List<Course> courses = courseService.findByName_obscure(Name);
-        model.addAttribute("list",courses);
-        return "allCourse";
-    }
-//    @RequestMapping("/search/{Name}")
-//    public String searchCourse_obscure(@PathVariable String Name,Model model){
+
+
+
+
+//    @RequestMapping("/search")
+//    public String searchCourse_obscure(String Name,Model model){
 //        System.out.println("收到关于 "+Name+" 的查询请求");
 //        List<Course> courses = courseService.findByName_obscure(Name);
 //        model.addAttribute("list",courses);
 //        return "allCourse";
 //    }
+
+    @GetMapping("/{Name}")
+    public String searchCourse_obscure(@PathVariable String Name,Model model){
+//        System.out.println("收到关于 "+Name+" 的查询请求");
+        List<Course> courses = courseService.findByName_obscure(Name);
+        model.addAttribute("list",courses);
+        return "allCourse";
+    }
 
 }
